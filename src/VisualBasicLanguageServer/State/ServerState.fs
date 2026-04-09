@@ -138,8 +138,8 @@ let getDocumentForUriOfType state docType (u: string) =
 
         let matchingUserDocumentMaybe =
             match matchingUserDocuments with
-            | [d] -> Some (d, UserDocument)
-            | _ -> None
+            | d :: _ -> Some (d, UserDocument)
+            | [] -> None
 
         let matchingDecompiledDocumentMaybe =
             Map.tryFind u state.DecompiledMetadata
