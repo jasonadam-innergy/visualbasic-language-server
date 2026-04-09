@@ -7,7 +7,7 @@ from pathlib import Path
 PROJECT = Path(__file__).parent / "src" / "VisualBasicLanguageServer" / "VisualBasicLanguageServer.fsproj"
 PUBLISH_DIR = Path(__file__).parent / "publish_output"
 INSTALL_DIR = Path.home() / ".dotnet" / "tools" / "vb-ls-patched"
-EXE_NAME = "VisualBasicLanguageServer.exe"
+EXE_NAME = "VisualBasicLanguageServer" + (".exe" if sys.platform == "win32" else "")
 
 
 def run(*cmd):
@@ -30,15 +30,15 @@ def main():
         "--output", PUBLISH_DIR,
     )
 
-    src = PUBLISH_DIR / EXE_NAME
-    if not src.exists():
-        print(f"ERROR: expected output not found at {src}", file=sys.stderr)
+    if not (PUBLISH_DIR / EXE_NAME).exists():
+        print(f"ERROR: expected output not found at {PUBLISH_DIR / EXE_NAME}", file=sys.stderr)
         sys.exit(1)
 
     INSTALL_DIR.mkdir(parents=True, exist_ok=True)
-    dst = INSTALL_DIR / EXE_NAME
-    shutil.copy2(src, dst)
-    print(f"\nInstalled: {dst}")
+    for src in PUBLISH_DIR.iterdir():
+        dst = INSTALL_DIR / src.name
+        shutil.copy2(src, dst)
+    print(f"\nInstalled to: {INSTALL_DIR}")
 
 
 if __name__ == "__main__":
