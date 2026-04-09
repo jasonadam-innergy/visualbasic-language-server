@@ -17,9 +17,8 @@ See [CHANGELOG.md](CHANGELOG.md) for the list of recent improvements/fixes.
 - vb-ls uses [ILSpy/ICSharpCode.Decompiler](https://github.com/icsharpcode/ILSpy) to decompile types in assemblies to C# source.
 
 # Installation
-`dotnet tool install --global vb-ls`
 
-See [vb-ls nuget page](https://www.nuget.org/packages/vb-ls/)
+To install, run the python build script found in the root directory of the source once you have cloned the project.
 
 # Settings
 
