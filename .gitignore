@@ -4,3 +4,4 @@ obj
 .idea/
 .config/
 nupkg/
+publish_output/
